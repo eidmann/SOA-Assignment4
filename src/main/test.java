@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Scanner;
+
 import org.json.JSONObject;
 import org.json.JSONArray;
 
@@ -34,11 +36,12 @@ public class test {
 		// JSONObject json =
 		// readJsonFromUrl("https://cloud.timeedit.net/ltu/web/schedule1/objects.html?max=15&fr=t&partajax=t&im=f&sid=3&l=sv_SE&search_text=D0023E&types=28");
 		test test = new test();
+		Scanner input = new Scanner(System.in);
 		try {
-//			System.out.println("Enter course code");
-//			Scanner input = new Scanner(System.in);
-//			String userName = input.nextLine();
-			test.searchCourse("D0023E");
+			
+			System.out.println("Enter course code");
+			String courseCode = input.nextLine();
+			test.searchCourse(courseCode);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

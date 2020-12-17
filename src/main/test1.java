@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -13,9 +14,13 @@ public class test1 {
 	public static void main(String[] args) {
 		
 		test1 test1 = new test1();
+		Scanner input = new Scanner(System.in);
+		getCourse course = new getCourse();
 		try {
 			//Här ska koden från test komma
-			test1.searchCourseInfo("132867.28");
+			System.out.println("Choose a decimal number");
+			String courseDecimal = input.nextLine();
+			test1.searchCourseInfo(courseDecimal);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
