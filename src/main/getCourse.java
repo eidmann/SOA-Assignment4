@@ -3,31 +3,20 @@ package main;
 import java.util.List;
 
 public class getCourse{
-	
-	public class Info{
-	    public int reservationlimit;
-	    public int reservationcount;
-		public int getReservationlimit() {
-			return reservationlimit;
-		}
-		public void setReservationlimit(int reservationlimit) {
-			this.reservationlimit = reservationlimit;
-		}
-		public int getReservationcount() {
-			return reservationcount;
-		}
-		public void setReservationcount(int reservationcount) {
-			this.reservationcount = reservationcount;
-		}
-	}
-	
-	public class Reservation{
-	    public String id;
+
+		public String decimalId;
+		public String id;
 	    public String startdate;
 	    public String starttime;
 	    public String enddate;
 	    public String endtime;
 	    public List<String> columns;
+	    public String getDecimalId() {
+			return decimalId;
+		}
+		public void setDecimalId(String decimalId) {
+			this.decimalId = decimalId;
+		}
 		public String getId() {
 			return id;
 		}
@@ -64,29 +53,4 @@ public class getCourse{
 		public void setColumns(List<String> columns) {
 			this.columns = columns;
 		}
-	}
-	
-	public class Root{
-	    public List<String> columnheaders;
-	    public Info info;
-	    public List<Reservation> reservations;
-		public List<String> getColumnheaders() {
-			return columnheaders;
-		}
-		public void setColumnheaders(List<String> columnheaders) {
-			this.columnheaders = columnheaders;
-		}
-		public Info getInfo() {
-			return info;
-		}
-		public void setInfo(Info info) {
-			this.info = info;
-		}
-		public List<Reservation> getReservations() {
-			return reservations;
-		}
-		public void setReservations(List<Reservation> reservations) {
-			this.reservations = reservations;
-		}
-	}
 }
