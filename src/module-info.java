@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author phili
- *
- */
-module info {
-}
