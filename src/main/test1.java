@@ -18,17 +18,35 @@ public class test1 {
 		getCourse course = new getCourse();
 		try {
 			//Här ska koden från test komma
-			System.out.println("Choose a decimal number");
+			System.out.println("Choose a decimal number(två sissta 2020) ex:133649.28");
 			String courseDecimal = input.nextLine();
+//			System.out.println("Choose startdate, all in a row, no spaces, / or -/n ex:20200901");
+//			String searchStartDate = input.nextLine();
+//			System.out.println("Choose enddate, all in a row, no spaces, / or -/n ex:20210117");
+//			String searchEndDate = input.nextLine();
+			if(courseDecimal.isEmpty()) {
+				System.out.println("Non valid search");
+				main(args);
+			}else {
 			test1.searchCourseInfo(courseDecimal);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public void searchCourseInfo(String courseDesimal){
+		/*Ska kunna modda datum i länken, skulle vara opti med
+		 * -att se vilka datum varje kod gäller för
+		 * -kanske skicka med om det är distans/campus
+		 * 
+		 * Worst case får vi bara modda datum i blindo
+		 */
 		String sourceURI = "https://cloud.timeedit.net/ltu/web/schedule1/ri.json?h=t&sid=3&p=20200901.x,20210117.x&objects=course&ox=0&types=0&fe=0";
 		sourceURI = sourceURI.replace("course", courseDesimal);
+//		sourceURI = sourceURI.replace("start", searchStartDate);
+//		sourceURI = sourceURI.replace("end", searchEndDate);
+		
 
 		getCourseInfo(sourceURI);
 	}

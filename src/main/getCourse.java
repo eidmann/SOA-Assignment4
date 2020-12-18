@@ -4,6 +4,7 @@ import java.util.List;
 
 public class getCourse{
 
+		public String value;
 		public String decimalId;
 		public String id;
 	    public String startdate;
@@ -11,7 +12,13 @@ public class getCourse{
 	    public String enddate;
 	    public String endtime;
 	    public List<String> columns;
-	    public String getDecimalId() {
+	    public String getValue() {
+			return value;
+		}
+		public void setValue(String value) {
+			this.value = value;
+		}
+		public String getDecimalId() {
 			return decimalId;
 		}
 		public void setDecimalId(String decimalId) {
