@@ -102,7 +102,7 @@ public class test {
 				course.setDecimalId(jsonobj_1.getString("idAndType"));
 				course.setValue(jsonobj_1.getString("values"));
 				
-				System.out.println(course.getDecimalId());
+				System.out.println(course.getDecimalId() + "- "+ course.getValue());
 				// Get data for the Address Components array
 				// System.out.println("The long names, short names and types are:");
 //	    	  for(int j=0;j<jsonarr_2.length();j++)
