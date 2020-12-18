@@ -60,4 +60,14 @@ public class getCourse{
 		public void setColumns(List<String> columns) {
 			this.columns = columns;
 		}
+		public void setColumnsPos(int pos, String info) {
+			this.columns.set(pos, info);
+		}
+		@Override
+		public String toString() {
+		    return "ID: " + this.getId() + 
+		           ", Date: " + this.getStartdate() +
+		           ", Time: " + this.getStarttime() +
+		           ", Columns " + this.getColumns();
+		}
 }
