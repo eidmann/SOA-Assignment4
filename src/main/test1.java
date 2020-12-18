@@ -35,6 +35,7 @@ public class test1 {
 		 * Worst case får vi bara modda datum i blindo
 		 */
 		// Scanner input = new Scanner(System.in);
+		ArrayList<getCourse> lekt = new ArrayList();
 		System.out.println("Choose a decimal number(två sissta 2020) ex:133649.28");
 		String courseDecimal = input.nextLine();
 		System.out.println("Choose startdate, all in a row, no spaces, / or -/n ex:20200901");
@@ -50,11 +51,13 @@ public class test1 {
 			System.out.println("Non valid search");
 			searchCourseInfo();
 		} else {
-			getCourseInfo(sourceURI);
+			getCourseInfo(sourceURI, lekt);
+			System.out.println(lekt);
+			System.out.println(lekt.get(19));
 		}
 	}
 
-	public void getCourseInfo(String sourceURI) {
+	public ArrayList<getCourse> getCourseInfo(String sourceURI, ArrayList<getCourse> lekt) {
 
 		try {
 			URL url = new URL(sourceURI);
@@ -84,7 +87,8 @@ public class test1 {
 			JSONArray jsonarr_1 = (JSONArray) jobj.get("reservations");
 			JSONArray jsonarr_2 = new JSONArray();
 			// getCourse course = new getCourse();
-			ArrayList<getCourse> lekt = new ArrayList();
+			//ArrayList<getCourse> 
+			//lekt = new ArrayList();
 			System.out.println("Elements under results array");
 			for (int i = 0; i < jsonarr_1.length(); i++) {
 				getCourse course = new getCourse();
@@ -172,6 +176,7 @@ public class test1 {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		return lekt;
 	}
 
 }
