@@ -69,6 +69,7 @@ public class App {
 
 					course.setDecimalId(jsonobj_1.getString("idAndType"));
 					course.setValue(jsonobj_1.getString("values"));
+					course.setPlats(getCourseType(jsonobj_1.getString("textId")));
 
 					System.out.println(course.getDecimalId() + "- " + course.getValue());
 					lekt.add(course);
@@ -82,6 +83,47 @@ public class App {
 		
 		return lekt;
 	}
+	
+	public String getCourseType(String courseID) {
+		
+		String sourceURI = "https://cloud.timeedit.net/ltu/web/schedule1/objects/courseID/o.json?fr=t&types=28&sid=3&l=sv_SE";
+		sourceURI = sourceURI.replace("courseID", courseID);
+		String type ="";
+		
+		
+		try {
+			URL url = new URL(sourceURI);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+			String inputLine;
+			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			StringBuffer response = new StringBuffer();
+
+			int responseCode = conn.getResponseCode();
+			System.out.println("Response code is: " + responseCode);
+			if (responseCode != 200)
+				throw new RuntimeException("HttpResponseCode: " + responseCode);
+			else {
+
+				while ((inputLine = in.readLine()) != null) {
+					response.append(inputLine);
+				}
+
+				in.close();
+			}
+
+			JSONObject jobj = new JSONObject(response.toString());
+			type = jobj.get("Kommentar").toString();
+
+			conn.disconnect();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return type;
+	}
+	
 	
 	public ArrayList<getCourse> searchCourseInfo(String courseId, String startDate, String endDate) {
 		ArrayList<getCourse> lekt = new ArrayList();

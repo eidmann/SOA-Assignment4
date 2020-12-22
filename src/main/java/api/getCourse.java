@@ -94,6 +94,6 @@ public class getCourse {
 	@Override
 	public String toString() {
 		return "Value: " + this.getValue()+ " decimalId: " + this.getDecimalId()+ " ID: " + this.getId() + ", Date: " + this.getStartdate() + ", Time: " + this.getStarttime()
-				+ ", Columns " + this.getColumns();
+				+ ", Columns " + this.getColumns() + ", Plats " + this.getPlats();
 	}
 }
