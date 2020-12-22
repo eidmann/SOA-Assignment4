@@ -27,7 +27,8 @@
 			<!-- val för vilken kurs och modul -->
 			<!-- Här sker valet av betyg på vald student kurs och modul -->
 			<div class="col">
-				<label>Kurs</label> <input placeholder="Ange Kurskod" id ="searchTxt" class="form-control"></input>
+				<label>Kurs</label> <input placeholder="Ange Kurskod" id="searchTxt"
+					class="form-control"></input>
 			</div>
 			<div class="col">
 				<label>År</label> <select id="year" class="form-control">
@@ -57,110 +58,127 @@
 		</div>
 	</div>
 	<!-- Knappar som utför script, detta var tänkt att göras som "onchange" för <select> dropdowns -->
-	
 
 
-	<div class="container" id="app-3">
-		<div class="col"></div>
-	<br>
-			<button class="btn btn-info" onclick="data()" v-on:click="loadData()">Ladda data</button>
-		<!--<p>
+	<div id="app-3">
+		<div class="container">
+			<br>
+			<button class="btn btn-info" onclick="data()" v-on:click="loadData()">Ladda
+				data</button>
+			<!--<p>
 			<button v-on:click="showBetyg()">Visa Ladok betyg</button>
 		</p>
 		<p>
 			<button v-on:click="setBetygLadok()">Satt Betyg</button>
 		</p>-->
-			<button class="btn btn-info" onclick="data2()" v-on:click="loadKursEvents()">Ladda Event</button>
-		<!--<p>
+			<button class="btn btn-info" onclick="data2()"
+				v-on:click="loadKursEvents()">Ladda Event</button>
+			<!--<p>
 			<button v-on:click="loadModule()">Ladda module</button>
 		</p>-->
-		<button class="btn btn-info" onclick="data3()">Ändra tillfälle</button>
-		<div id="t1" style="display:none">
-		<table class="table">
-			<thead>
-				<th scope="col"></th>
-				<th scope="col">ID</th>
-				<th scope="col">Kurs Namn</th>
-				<!-- <th scope="col">Omdöme i Canvas</th>
+			<button class="btn btn-info" onclick="data3()">Ändra
+				tillfälle</button>
+			<div id="t1" style="display: none">
+				<table class="table">
+					<thead>
+						<th scope="col"></th>
+						<th scope="col">ID</th>
+						<th scope="col">Kurs Namn</th>
+						<!-- <th scope="col">Omdöme i Canvas</th>
 				<th scope="col">Examinationsdatum</th>
 				<th scope="col">Betyg i Ladok</th>
 				<th scope="col">Status</th>
 				<th scope="col">Information</th> -->
-			</thead>
-			<tbody id="Table1">
-				<tr v-for="course in courses">
-					<td><input type="checkbox"></td>
-					<td>{{course.decimalId}}</td>
-					<td>{{course.value}}</td>
-					<!-- <td></td>
+					</thead>
+					<tbody id="Table1">
+						<tr v-for="course in courses">
+							<td><input type="checkbox"></td>
+							<td>{{course.decimalId}}</td>
+							<td>{{course.value}}</td>
+							<!-- <td></td>
 					<td><input class="form-control" type="date" value="yyyy-mm-dd"></td>
 					<td></td>
 					<td></td>
 					<td>Test</td> -->
-				</tr>
-			</tbody>
-		</table>
-		</div>
-		<div id="t2" style="display:none">
-		<table class="table" style="margin: 1px">
-		<thead>	<th scope="col"></th>
-				<th scope="col">ID</th>
-				<th scope="col">Tid</th>
-				<th scope="col">0</th>
-				<th scope="col">1</th>
-				<th scope="col">2</th>
-				<th scope="col">3</th>
-				<th scope="col">4</th>
-				<!--<th scope="col">5</th>-->
-				<th scope="col">6</th>
-				<th scope="col">7</th>
-				<th scope="col">8</th>
-				<th scope="col">9</th>
-				<th scope="col">10</th>
-				<th scope="col">11</th>
-				<th scope="col">12</th>
-			</thead>
-			<tbody id="Table2">
-				<tr v-for="event in events">
-					<td><input type="checkbox"></td>
-					<td>{{event.id}}</td>
-					<td>{{event.starttime}}-{{event.endtime}}</td>
-					<td>{{event.columns[0]}}</td>
-					<td>{{event.columns[1]}}</td>
-					<td>{{event.columns[2]}}</td>
-					<td>{{event.columns[3]}}</td>
-					<td>{{event.columns[4]}}</td>
-					<!--<td>{{event.columns[5]}}</td>-->
-					<td>{{event.columns[6]}}</td>
-					<td>{{event.columns[7]}}</td>
-					<td>{{event.columns[8]}}</td>
-					<td>{{event.columns[9]}}</td>
-					<td>{{event.columns[10]}}</td>
-					<td>{{event.columns[11]}}</td>
-					<td>{{event.columns[12]}}</td>
-				</tr>
-			</tbody>
-		</table>
-		</div>
-		<div v-for="event in events" class="container">
-		<div class="row" id="t3" style="display:none; width:50%">
-		
-		<label>0</label><textarea class="form-control">{{event.columns[0]}}</textarea>
-		<label>1</label><textarea class="form-control">{{event.columns[1]}}</textarea>
-		<label>2</label><textarea class="form-control">{{event.columns[2]}}</textarea>
-		<label>3</label><textarea class="form-control">{{event.columns[3]}}</textarea>
-		<label>4</label><textarea class="form-control">{{event.columns[4]}}</textarea>
-		<label>5</label><textarea class="form-control">{{event.columns[5]}}</textarea>
-		<label>6</label><textarea class="form-control">{{event.columns[6]}}</textarea>
-		<label>7</label><textarea class="form-control">{{event.columns[7]}}</textarea>
-		<label>8</label><textarea class="form-control">{{event.columns[8]}}</textarea>
-		<label>9</label><textarea class="form-control">{{event.columns[9]}}</textarea>
-		<label>10</label><textarea class="form-control">{{event.columns[10]}}</textarea>
-		<label>11</label><textarea class="form-control">{{event.columns[11]}}</textarea>
-		<label>12</label><textarea class="form-control">{{event.columns[12]}}</textarea>
-		</div>
-		</div>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="t2" style="display: none">
+				<table class="table" style="margin: 1px">
+					<thead>
+						<th scope="col"></th>
+						<th scope="col">ID</th>
+						<th scope="col">Tid</th>
+						<th scope="col">0</th>
+						<th scope="col">1</th>
+						<th scope="col">2</th>
+						<th scope="col">3</th>
+						<th scope="col">4</th>
+						<!--<th scope="col">5</th>-->
+						<th scope="col">6</th>
+						<th scope="col">7</th>
+						<th scope="col">8</th>
+						<th scope="col">9</th>
+						<th scope="col">10</th>
+						<th scope="col">11</th>
+						<th scope="col">12</th>
+					</thead>
+					<tbody id="Table2">
+						<tr v-for="event in events">
+							<td><input type="checkbox"></td>
+							<td>{{event.id}}</td>
+							<td>{{event.starttime}}-{{event.endtime}}</td>
+							<td>{{event.columns[0]}}</td>
+							<td>{{event.columns[1]}}</td>
+							<td>{{event.columns[2]}}</td>
+							<td>{{event.columns[3]}}</td>
+							<td>{{event.columns[4]}}</td>
+							<!--<td>{{event.columns[5]}}</td>-->
+							<td>{{event.columns[6]}}</td>
+							<td>{{event.columns[7]}}</td>
+							<td>{{event.columns[8]}}</td>
+							<td>{{event.columns[9]}}</td>
+							<td>{{event.columns[10]}}</td>
+							<td>{{event.columns[11]}}</td>
+							<td>{{event.columns[12]}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		<div v-for="event in events" id="t3"
+			style="display: none;">
+			<div class="row">
+					<label>0</label>
+					<textarea class="form-control">{{event.columns[0]}}</textarea>
+					<label>1</label>
+					<textarea class="form-control">{{event.columns[1]}}</textarea>
+					<label>2</label>
+					<textarea class="form-control">{{event.columns[2]}}</textarea>
+					<label>3</label>
+					<textarea class="form-control">{{event.columns[3]}}</textarea>
+					<label>4</label>
+					<textarea class="form-control">{{event.columns[4]}}</textarea>
+					<label>5</label>
+					<textarea class="form-control">{{event.columns[5]}}</textarea>
+					<label>6</label>
+					<textarea class="form-control">{{event.columns[6]}}</textarea>
+					<label>7</label>
+					<textarea class="form-control">{{event.columns[7]}}</textarea>
+					<label>8</label>
+					<textarea class="form-control">{{event.columns[8]}}</textarea>
+					<label>9</label>
+					<textarea class="form-control">{{event.columns[9]}}</textarea>
+					<label>10</label>
+					<textarea class="form-control">{{event.columns[10]}}</textarea>
+					<label>11</label>
+					<textarea class="form-control">{{event.columns[11]}}</textarea>
+					<label>12</label>
+					<textarea class="form-control">{{event.columns[12]}}</textarea>
 	</div>
+	</div>
+	</div>
+			</div>
 	<script>
 	function data() {
 		 document.getElementById("t1").style.display = "flex";
@@ -243,7 +261,11 @@
 			 })
 		 },
 		 //Sätter betyg i "Ladok" AKA modulebetyg i DB
-   		setBetygLadok: function(){
+   		
+		 
+		 
+		 
+		 setBetygLadok: function(){
 			 //Reference the Table. Används för att hitta värdet på actor ID
 		        var grid = document.getElementById("Table1");
 		 
