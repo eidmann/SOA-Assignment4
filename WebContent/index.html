@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+	crossorigin="anonymous">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<title>LTU</title>
+</head>
+<body style="margin: 30px;">
+	<div class="container">
+		<div class="row">
+			<!-- val för vilken kurs och modul -->
+			<!-- Här sker valet av betyg på vald student kurs och modul -->
+			<div class="col">
+				<label>Kurs</label> <input class="form-control"></input>
+			</div>
+			<div class="col">
+				<label>År</label> <select id="year" class="form-control">
+					<option selected>-</option>
+					<option value="2020">2020</option>
+					<option value="2019">2019</option>
+				</select>
+			</div>
+			<div class="col">
+				<label>Månad</label> <select id="month" class="form-control">
+					<option selected>-</option>
+					<option value="01">Januari</option>
+					<option value="02">Februari</option>
+					<option value="03">Mars</option>
+					<option value="04">April</option>
+					<option value="05">Maj</option>
+					<option value="06">Juni</option>
+					<option value="07">Juli</option>
+					<option value="08">Augusti</option>
+					<option value="09">September</option>
+					<option value="10">Oktober</option>
+					<option value="11">November</option>
+					<option value="12">December</option>
+				</select>
+			</div>
+
+		</div>
+	</div>
+	<!-- Knappar som utför script, detta var tänkt att göras som "onchange" för <select> dropdowns -->
+	<div class="container" id="app-2">
+		<br>
+		<!-- 	<div class="row"> -->
+		<!-- 		<div class="col"> -->
+		<!-- 			<button class="btn btn-info" v-on:click="loadData()">Ladda data</button> -->
+		<!-- 		</div> -->
+		<!-- 	</div><br> -->
+		<!-- Rubriker för tabellen -->
+		<table class="table">
+			<thead>
+				<th scope="col"></th>
+				<th scope="col">KursKod</th>
+				<th scope="col">KursNamn</th>
+				<!-- 				<th scope="col">{{getCourse.decimalId}}</th> -->
+			</thead>
+			<!-- Den genererade tabellens inehåll med användare och relaterad information -->
+
+			<tbody id="Table1">
+				<tr>
+					<td><input type="checkbox"></td>
+					<td>{{getCourse.decimalId}}</td>
+					<td>{{getCourse.value}} {{user.lname}}</td>
+					<td>Test</td>
+				</tr>
+			</tbody>
+		</table>
+		<button class="btn btn-info" v-on:click="loadData()">Ladda
+			data</button>
+	</div>
+
+
+	<div class="container" id="app-3">
+		<div class="col"></div>
+
+		<p>
+			<button v-on:click="loadData()">Ladda data</button>
+		</p>
+		<p>
+			<button v-on:click="showBetyg()">Visa Ladok betyg</button>
+		</p>
+		<p>
+			<button v-on:click="setBetygLadok()">Satt Betyg</button>
+		</p>
+		<p>
+			<button v-on:click="loadKursEvents()">Ladda Event</button>
+		</p>
+		<p>
+			<button v-on:click="loadModule()">Ladda module</button>
+		</p>
+		<table class="table">
+			<thead>
+				<th scope="col"></th>
+				<th scope="col">ID</th>
+				<th scope="col">Namn</th>
+				<th scope="col">Omdöme i Canvas</th>
+				<th scope="col">Examinationsdatum</th>
+				<th scope="col">Betyg i Ladok</th>
+				<th scope="col">Status</th>
+				<th scope="col">Information</th>
+			</thead>
+			<tbody id="Table1">
+				<tr v-for="course in courses">
+					<td><input type="checkbox"></td>
+					<td>{{course.decimalId}}</td>
+					<td>{{course.value}}</td>
+					<td></td>
+					<td><input class="form-control" type="date" value="yyyy-mm-dd"></td>
+					<td></td>
+					<td></td>
+					<td>Test</td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="table">
+			<thead>
+				<th scope="col"></th>
+				<th scope="col">ID</th>
+				<th scope="col">Namn</th>
+				<th scope="col">StartDate</th>
+				<th scope="col">StartTime</th>
+				<th scope="col">EndTime</th>
+				<th scope="col">Columns</th>
+				<th scope="col">Information</th>
+			</thead>
+			<tbody id="Table2">
+				<tr v-for="event in events">
+					<td><input type="checkbox"></td>
+					<td>{{event.id}}</td>
+					<td>{{event.value}}</td>
+					<td>{{event.starttime}}</td>
+					<td><input class="form-control" type="date" value="yyyy-mm-dd"></td>
+					<td>{{event.endtime}}</td>
+					<td>{{event.columns}}</td>
+					<td>Test</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+	<script>
+	//hämtar kurskod från dropdown
+	var sel = document.getElementById("inputState");
+	//hämtar betyg från drop
+	var selBet = document.getElementById("betygLadok");
+	//hämtar module namn från drop
+	var selMod = document.getElementById("modulId");
+	var selYear = document.getElementById("year");
+	var selMonth = document.getElementById("month");
+// initierar VUE
+	var app2 = new Vue({
+   	 el: '#app-3',
+   	 data:{
+   		 //Array för users, används för att visa resultat från DB
+   		 courses: [],
+   		events: [],
+   		columns: [],
+//    		 modules: [], användes för att hämta module namnen till drop-listan
+   	 },
+   	 methods: {
+   		 //Hämtar alla studenter
+   		 loadData: function(){
+   			axios.get('http://localhost:8080/EA-SOA-Projekt/api/response/kurskod/D0023E')
+			 .then(response => {
+				 this.courses = response.data;
+				 console.log(response);
+			 })
+			 .catch(error =>{
+				 console.log(error);
+			 })
+   		 }, 
+   		 //användes under test
+//    		loadModule: function(){
+// 			 axios.get('http://localhost:8080/HelloREST/rest/response/modbetyg/' + selMod.value)
+// 			 .then(response => {
+// 				 this.modules = response.data;
+// 				 console.log(response);
+// 			 })
+// 			 .catch(error =>{
+// 				 console.log(error);
+// 			 })
+// 		 },
+
+   		 //Används för att visa resultat efter sök filter med kurs och modul
+   		loadKursEvents: function(){
+   			var grid = document.getElementById("Table2");
+   		 
+//	        Reference the CheckBoxes in Table.
+	        var checkBoxes = grid.getElementsByTagName("INPUT");
+	        var message="133650.28";
+// 	        var mod = selMod.options[selMod.selectedIndex].text;
+	 
+	        //Loop through the CheckBoxes. onödigt med loop men "funkar"
+	        for (var i = 0; i < checkBoxes.length; i++) {
+	            if (checkBoxes[i].checked) {
+	                var row = checkBoxes[i].parentNode.parentNode;
+	                message = row.cells[1].innerHTML;
+	            }
+	        }
+			 axios.get('http://localhost:8080/EA-SOA-Projekt/api/response/kursid/'+ message +'/'
+					 + selYear.value + selMonth.value+'01/' + selYear.value + selMonth.value+'31' )
+			 .then(response => {
+				 this.events = response.data;
+				 console.log(response);
+			 })
+			 .catch(error =>{
+				 console.log(error);
+			 })
+		 },
+		 //Sätter betyg i "Ladok" AKA modulebetyg i DB
+   		setBetygLadok: function(){
+			 //Reference the Table. Används för att hitta värdet på actor ID
+		        var grid = document.getElementById("Table1");
+		 
+//		        Reference the CheckBoxes in Table.
+		        var checkBoxes = grid.getElementsByTagName("INPUT");
+		        var message;
+		        var mod = selMod.options[selMod.selectedIndex].text;
+		 
+		        //Loop through the CheckBoxes. onödigt med loop men "funkar"
+		        for (var i = 0; i < checkBoxes.length; i++) {
+		            if (checkBoxes[i].checked) {
+		                var row = checkBoxes[i].parentNode.parentNode;
+		                message = row.cells[1].innerHTML;
+		            }
+		        }
+		 
+		        //Display selected Row data in Alert Box.
+		        //console.log(selMod.value);
+		        alert(message + " " + selBet.value + " " + sel.value + " " + selMod.value);//alert så vi kan se vilka värden vi för, mest för test
+		        
+			 axios.post('http://localhost:8080/HelloREST/rest/response/Ladok/' + message +'/'+ selBet.value + '/' + selMod.value + '/' + sel.value)
+			 .then(response => {
+				 this.users = response.data;
+				 console.log(response);// logga för att kontrollera resultat under test
+			 })
+			 .catch(error =>{
+				 console.log(error);
+			 })
+		 },
+		 
+   	 }
+    });
+	
+	</script>
+</body>
+</html>

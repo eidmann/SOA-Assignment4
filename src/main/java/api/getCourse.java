@@ -1,4 +1,4 @@
-package main;
+package main.java.api;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ public class getCourse {
 
 	public String value;
 	public String decimalId;
+	public String plats;
 	public String id;
 	public String startdate;
 	public String starttime;
@@ -13,6 +14,15 @@ public class getCourse {
 	public String endtime;
 	public List<String> columns;
 
+	
+	public String getPlats() {
+		return plats;
+	}
+
+	public void setPlats(String plats) {
+		this.plats = plats;
+	}
+	
 	public String getValue() {
 		return value;
 	}
@@ -83,7 +93,7 @@ public class getCourse {
 
 	@Override
 	public String toString() {
-		return "ID: " + this.getId() + ", Date: " + this.getStartdate() + ", Time: " + this.getStarttime()
+		return "Value: " + this.getValue()+ " decimalId: " + this.getDecimalId()+ " ID: " + this.getId() + ", Date: " + this.getStartdate() + ", Time: " + this.getStarttime()
 				+ ", Columns " + this.getColumns();
 	}
 }
