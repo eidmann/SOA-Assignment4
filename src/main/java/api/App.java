@@ -40,7 +40,7 @@ public class App {
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
 			String inputLine;
-			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 			StringBuffer response = new StringBuffer();
 
 			int responseCode = conn.getResponseCode();
@@ -96,7 +96,7 @@ public class App {
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
 			String inputLine;
-			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 			StringBuffer response = new StringBuffer();
 
 			int responseCode = conn.getResponseCode();
@@ -155,7 +155,7 @@ public class App {
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
 			String inputLine;
-			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 			StringBuffer response = new StringBuffer();
 
 			int responseCode = conn.getResponseCode();
