@@ -27,7 +27,7 @@
 			<!-- val för vilken kurs och modul -->
 			<!-- Här sker valet av betyg på vald student kurs och modul -->
 			<div class="col">
-				<label>Kurs</label> <input class="form-control"></input>
+				<label>Kurs</label> <input placeholder="Ange Kurskod" id ="searchTxt" class="form-control"></input>
 			</div>
 			<div class="col">
 				<label>År</label> <select id="year" class="form-control">
@@ -96,7 +96,7 @@
 					<td>{{course.decimalId}}</td>
 					<td>{{course.value}}</td>
 					<td></td>
-					<td><input class="form-control" type="date" value="yyyy-mm-dd"></td>
+<!-- 					<td><input class="form-control" type="date" value="yyyy-mm-dd"></td> -->
 					<td></td>
 					<td></td>
 					<td>Test</td>
@@ -162,7 +162,8 @@ function data2(){
    	 methods: {
    		 //Hämtar alla studenter
    		 loadData: function(){
-   			axios.get('http://localhost:8080/EA-SOA-Projekt/api/response/kurskod/D0023E')
+   			 var selKurs = document.getElementById("searchTxt").value;
+   			axios.get('http://localhost:8080/EA-SOA-Projekt/api/response/kurskod/' + selKurs)
 			 .then(response => {
 				 this.courses = response.data;
 				 console.log(response);
@@ -185,11 +186,11 @@ function data2(){
 
    		 //Används för att visa resultat efter sök filter med kurs och modul
    		loadKursEvents: function(){
-   			var grid = document.getElementById("Table2");
+   			var grid = document.getElementById("Table1");
    		 
 //	        Reference the CheckBoxes in Table.
-	        var checkBoxes = grid.getElementsByTagName("INPUT");
-	        var message="133650.28";
+	        var checkBoxes = grid.getElementsByTagName("input");
+	        var message;
 // 	        var mod = selMod.options[selMod.selectedIndex].text;
 	 
 	        //Loop through the CheckBoxes. onödigt med loop men "funkar"
@@ -199,6 +200,7 @@ function data2(){
 	                message = row.cells[1].innerHTML;
 	            }
 	        }
+	        alert(message);
 			 axios.get('http://localhost:8080/EA-SOA-Projekt/api/response/kursid/'+ message +'/'
 					 + selYear.value + selMonth.value+'01/' + selYear.value + selMonth.value+'31' )
 			 .then(response => {
