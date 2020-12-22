@@ -142,34 +142,22 @@
 			</tbody>
 		</table>
 		</div>
-		<div class="container">
-		<div class="row" id="t3" style="display:none; width:30%">
-		<label>0</label>
-		<input id ="searchTxt" class="form-control"></input>
-		<label>1</label>
-		<input id ="searchTxt" class="form-control"></input>
-		<label>2</label>
-		<input id ="searchTxt" class="form-control"></input>
-		<label>3</label>
-		<input id ="searchTxt" class="form-control"></input>
-		<label>4</label>
-		<input id ="searchTxt" class="form-control"></input>
-		<label>5</label>
-		<input id ="searchTxt" class="form-control"></input>
-		<label>6</label>
-		<input id ="searchTxt" class="form-control"></input>
-		<label>7</label>
-		<input id ="searchTxt" class="form-control"></input>
-		<label>8</label>
-		<input id ="searchTxt" class="form-control"></input>
-		<label>9</label>
-		<input id ="searchTxt" class="form-control"></input>
-		<label>10</label>
-		<input id ="searchTxt" class="form-control"></input>
-		<label>11</label>
-		<input id ="searchTxt" class="form-control"></input>
-		<label>12</label>
-		<input id ="searchTxt" class="form-control"></input>
+		<div v-for="event in events" class="container">
+		<div class="row" id="t3" style="display:none; width:50%">
+		
+		<label>0</label><textarea class="form-control">{{event.columns[0]}}</textarea>
+		<label>1</label><textarea class="form-control">{{event.columns[1]}}</textarea>
+		<label>2</label><textarea class="form-control">{{event.columns[2]}}</textarea>
+		<label>3</label><textarea class="form-control">{{event.columns[3]}}</textarea>
+		<label>4</label><textarea class="form-control">{{event.columns[4]}}</textarea>
+		<label>5</label><textarea class="form-control">{{event.columns[5]}}</textarea>
+		<label>6</label><textarea class="form-control">{{event.columns[6]}}</textarea>
+		<label>7</label><textarea class="form-control">{{event.columns[7]}}</textarea>
+		<label>8</label><textarea class="form-control">{{event.columns[8]}}</textarea>
+		<label>9</label><textarea class="form-control">{{event.columns[9]}}</textarea>
+		<label>10</label><textarea class="form-control">{{event.columns[10]}}</textarea>
+		<label>11</label><textarea class="form-control">{{event.columns[11]}}</textarea>
+		<label>12</label><textarea class="form-control">{{event.columns[12]}}</textarea>
 		</div>
 		</div>
 	</div>
