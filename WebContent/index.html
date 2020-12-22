@@ -62,85 +62,93 @@
 
 	<div class="container" id="app-3">
 		<div class="col"></div>
-
-		<p>
-			<button onclick="data()" v-on:click="loadData()">Ladda data</button>
-		</p>
-		<p>
+	<br>
+			<button class="btn btn-info" onclick="data()" v-on:click="loadData()">Ladda data</button>
+		<!--<p>
 			<button v-on:click="showBetyg()">Visa Ladok betyg</button>
 		</p>
 		<p>
 			<button v-on:click="setBetygLadok()">Satt Betyg</button>
-		</p>
-		<p>
-			<button onclick="data2()" v-on:click="loadKursEvents()">Ladda Event</button>
-		</p>
-		<p>
+		</p>-->
+			<button class="btn btn-info" onclick="data2()" v-on:click="loadKursEvents()">Ladda Event</button>
+		<!--<p>
 			<button v-on:click="loadModule()">Ladda module</button>
-		</p>
+		</p>-->
 		<div id="t1" style="display:none">
 		<table class="table">
 			<thead>
 				<th scope="col"></th>
 				<th scope="col">ID</th>
-				<th scope="col">Namn</th>
-				<th scope="col">Omdöme i Canvas</th>
+				<th scope="col">Kurs Namn</th>
+				<!-- <th scope="col">Omdöme i Canvas</th>
 				<th scope="col">Examinationsdatum</th>
 				<th scope="col">Betyg i Ladok</th>
 				<th scope="col">Status</th>
-				<th scope="col">Information</th>
+				<th scope="col">Information</th> -->
 			</thead>
 			<tbody id="Table1">
 				<tr v-for="course in courses">
 					<td><input type="checkbox"></td>
 					<td>{{course.decimalId}}</td>
 					<td>{{course.value}}</td>
+					<!-- <td></td>
+					<td><input class="form-control" type="date" value="yyyy-mm-dd"></td>
 					<td></td>
-<!-- 					<td><input class="form-control" type="date" value="yyyy-mm-dd"></td> -->
 					<td></td>
-					<td></td>
-					<td>Test</td>
+					<td>Test</td> -->
 				</tr>
 			</tbody>
 		</table>
 		</div>
 		<div id="t2" style="display:none">
-		<table class="table">
+		<table class="table" style="margin: 1px">
 		<thead>	<th scope="col"></th>
 				<th scope="col">ID</th>
-				<th scope="col">?</th>
-				<th scope="col">datum</th>
-				<th scope="col" style="width:8%">Start tid</th>
-				<th scope="col" style="width:8%">Slut tid</th>
-				<th scope="col">Info</th>
-				<th scope="col">?</th>
+				<th scope="col">Tid</th>
+				<th scope="col">1</th>
+				<th scope="col">2</th>
+				<th scope="col">3</th>
+				<th scope="col">4</th>
+				<!--<th scope="col">5</th>-->
+				<th scope="col">6</th>
+				<th scope="col">7</th>
+				<th scope="col">8</th>
+				<th scope="col">9</th>
+				<th scope="col">10</th>
+				<th scope="col">11</th>
+				<th scope="col">12</th>
 			</thead>
 			<tbody id="Table2">
 				<tr v-for="event in events">
 					<td><input type="checkbox"></td>
 					<td>{{event.id}}</td>
-					<td>{{event.value}}</td>
-					<td></td>
-					<td>{{event.starttime}}</td>
-					<td>{{event.endtime}}</td>
-					<td>{{event.columns}}</td>
-					<td>Test</td>
+					<td>{{event.starttime}}-{{event.endtime}}</td>
+					<td>{{event.columns[1]}}</td>
+					<td>{{event.columns[2]}}</td>
+					<td>{{event.columns[3]}}</td>
+					<td>{{event.columns[4]}}</td>
+					<!--<td>{{event.columns[5]}}</td>-->
+					<td>{{event.columns[6]}}</td>
+					<td>{{event.columns[7]}}</td>
+					<td>{{event.columns[8]}}</td>
+					<td>{{event.columns[9]}}</td>
+					<td>{{event.columns[10]}}</td>
+					<td>{{event.columns[11]}}</td>
+					<td>{{event.columns[12]}}</td>
 				</tr>
 			</tbody>
 		</table>
 		</div>
 	</div>
-
-
 	<script>
 	function data() {
 		 document.getElementById("t1").style.display = "flex";
 		 document.getElementById("t2").style.display = "none";
 		}
-function data2(){
-	document.getElementById("t2").style.display = "flex";
-	
-}
+	function data2(){
+		document.getElementById("t2").style.display = "flex";
+		
+	}
 	//hämtar kurskod från dropdown
 	var sel = document.getElementById("inputState");
 	//hämtar betyg från drop
@@ -154,7 +162,7 @@ function data2(){
    	 el: '#app-3',
    	 data:{
    		 //Array för users, används för att visa resultat från DB
-   		 courses: [],
+   		courses: [],
    		events: [],
    		columns: [],
 //    		 modules: [], användes för att hämta module namnen till drop-listan
