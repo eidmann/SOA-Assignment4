@@ -76,9 +76,9 @@
 			<!--<p>
 			<button v-on:click="loadModule()">Ladda module</button>
 		</p>-->
-			<button class="btn btn-info" onclick="data3()">Ändra
-				tillfälle</button>
-			<div id="t1" style="display: none">
+			<button class="btn btn-info" onclick="data3()" 
+			v-on:click="mittskit()">Ändra tillfälle</button>
+			<div id="t1" style="display: none;">
 				<table class="table">
 					<thead>
 						<th scope="col"></th>
@@ -106,7 +106,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div id="t2" style="display: none">
+			<div id="t2" style="display: none;">
 				<table class="table" style="margin: 1px">
 					<thead>
 						<th scope="col"></th>
@@ -148,35 +148,35 @@
 					</tbody>
 				</table>
 			</div>
-		<div v-for="event in events" id="t3"
-			style="display: none;">
+		<div v-for="column in columns" id="t3">
 			<div class="row">
+			<!-- <span>{{column.columns[1]}}</span><br> -->
 					<label>0</label>
-					<textarea class="form-control">{{event.columns[0]}}</textarea>
+					<textarea class="form-control">{{column.columns[0]}}</textarea>
 					<label>1</label>
-					<textarea class="form-control">{{event.columns[1]}}</textarea>
+					<textarea class="form-control">{{column.columns[1]}}</textarea>
 					<label>2</label>
-					<textarea class="form-control">{{event.columns[2]}}</textarea>
+					<textarea class="form-control">{{column.columns[2]}}</textarea>
 					<label>3</label>
-					<textarea class="form-control">{{event.columns[3]}}</textarea>
+					<textarea class="form-control">{{column.columns[3]}}</textarea>
 					<label>4</label>
-					<textarea class="form-control">{{event.columns[4]}}</textarea>
+					<textarea class="form-control">{{column.columns[4]}}</textarea>
 					<label>5</label>
-					<textarea class="form-control">{{event.columns[5]}}</textarea>
+					<textarea class="form-control">{{column.columns[5]}}</textarea>
 					<label>6</label>
-					<textarea class="form-control">{{event.columns[6]}}</textarea>
+					<textarea class="form-control">{{column.columns[6]}}</textarea>
 					<label>7</label>
-					<textarea class="form-control">{{event.columns[7]}}</textarea>
+					<textarea class="form-control">{{column.columns[7]}}</textarea>
 					<label>8</label>
-					<textarea class="form-control">{{event.columns[8]}}</textarea>
+					<textarea class="form-control">{{column.columns[8]}}</textarea>
 					<label>9</label>
-					<textarea class="form-control">{{event.columns[9]}}</textarea>
+					<textarea class="form-control">{{column.columns[9]}}</textarea>
 					<label>10</label>
-					<textarea class="form-control">{{event.columns[10]}}</textarea>
+					<textarea class="form-control">{{column.columns[10]}}</textarea>
 					<label>11</label>
-					<textarea class="form-control">{{event.columns[11]}}</textarea>
+					<textarea class="form-control">{{column.columns[11]}}</textarea>
 					<label>12</label>
-					<textarea class="form-control">{{event.columns[12]}}</textarea>
+					<textarea class="form-control">{{column.columns[12]}}</textarea>
 	</div>
 	</div>
 	</div>
@@ -185,7 +185,7 @@
 	function data() {
 		 document.getElementById("t1").style.display = "flex";
 		 document.getElementById("t2").style.display = "none";
-		 document.getElementById("t3").style.display = "none";
+		 
 		}
 	function data2(){
 		document.getElementById("t2").style.display = "flex";
@@ -201,6 +201,7 @@
 	var selMod = document.getElementById("modulId");
 	var selYear = document.getElementById("year");
 	var selMonth = document.getElementById("month");
+	var message1;
 // initierar VUE
 	var app2 = new Vue({
    	 el: '#app-3',
@@ -209,6 +210,7 @@
    		courses: [],
    		events: [],
    		columns: [],
+   		
 //    		 modules: [], användes för att hämta module namnen till drop-listan
    	 },
    	 methods: {
@@ -242,18 +244,18 @@
    		 
 //	        Reference the CheckBoxes in Table.
 	        var checkBoxes = grid.getElementsByTagName("input");
-	        var message;
+	        //var message;
 // 	        var mod = selMod.options[selMod.selectedIndex].text;
 	 
 	        //Loop through the CheckBoxes. onödigt med loop men "funkar"
 	        for (var i = 0; i < checkBoxes.length; i++) {
 	            if (checkBoxes[i].checked) {
 	                var row = checkBoxes[i].parentNode.parentNode;
-	                message = row.cells[1].innerHTML;
+	                message1 = row.cells[1].innerHTML;
 	            }
 	        }
-	        alert(message);
-			 axios.get('http://localhost:8080/EA-SOA-Projekt/api/response/kursid/'+ message +'/'
+	        alert(message1);
+			 axios.get('http://localhost:8080/EA-SOA-Projekt/api/response/kursid/'+ message1 +'/'
 					 + selYear.value + selMonth.value+'01/' + selYear.value + selMonth.value+'31' )
 			 .then(response => {
 				 this.events = response.data;
@@ -263,38 +265,37 @@
 				 console.log(error);
 			 })
 		 },
-		 //Sätter betyg i "Ladok" AKA modulebetyg i DB
-		 setBetygLadok: function(){
-			 //Reference the Table. Används för att hitta värdet på actor ID
-		        var grid = document.getElementById("Table1");
-		 
-//		        Reference the CheckBoxes in Table.
-		        var checkBoxes = grid.getElementsByTagName("INPUT");
-		        var message;
-		        var mod = selMod.options[selMod.selectedIndex].text;
-		 
-		        //Loop through the CheckBoxes. onödigt med loop men "funkar"
-		        for (var i = 0; i < checkBoxes.length; i++) {
+		 /* axios.get('http://localhost:8080/EA-SOA-Projekt/api/response/kursid/'+ message1 +'/'
+				 + selYear.value + selMonth.value+'01/' + selYear.value + selMonth.value+'31' )
+				 .then(mittskit:function(response){
+					 
+				 }); */
+		 mittskit: function(){
+			 var grid = document.getElementById("Table2");
+			 var checkBoxes = grid.getElementsByTagName("input");
+			 var message;
+			 for (var i = 0; i < checkBoxes.length; i++) {
 		            if (checkBoxes[i].checked) {
 		                var row = checkBoxes[i].parentNode.parentNode;
 		                message = row.cells[1].innerHTML;
 		            }
 		        }
-		 
-		        //Display selected Row data in Alert Box.
-		        //console.log(selMod.value);
-		        alert(message + " " + selBet.value + " " + sel.value + " " + selMod.value);//alert så vi kan se vilka värden vi för, mest för test
-		        
-			 axios.post('http://localhost:8080/HelloREST/rest/response/Ladok/' + message +'/'+ selBet.value + '/' + selMod.value + '/' + sel.value)
+			 alert(message);
+			 axios.get('http://localhost:8080/EA-SOA-Projekt/api/response/lektid/'+ message1 +'/'
+					 + selYear.value + selMonth.value+'01/' + selYear.value + selMonth.value+'31/' +message +'' )
 			 .then(response => {
-				 this.users = response.data;
-				 console.log(response);// logga för att kontrollera resultat under test
+				 this.columns = response.data;
+				 console.log(response);
 			 })
 			 .catch(error =>{
 				 console.log(error);
 			 })
-		 },
+		 }
 		 
+		 
+		 
+		 
+
    	 }
     });
     </script>

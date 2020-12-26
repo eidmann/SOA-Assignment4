@@ -1,6 +1,6 @@
 package main.java.api;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -37,7 +37,14 @@ public class GetResponse {
 		App.toString();
 		return Response.ok(App).build();
 	}
-	
+	@GET
+	@Path("/lektid/{id}/{startDate}/{endDate}/{lektId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response clas(@PathParam("id") String courseId,@PathParam("startDate") String startDate, @PathParam("endDate") String endDate, @PathParam("lektId") String lektId){
+		ArrayList<getCourse> App = new App().searchLektInfo(courseId,startDate,endDate, lektId);
+		App.toString();
+		return Response.ok(App).build();
+	}
 	
 	
 }

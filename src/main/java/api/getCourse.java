@@ -4,6 +4,7 @@ import java.util.List;
 
 public class getCourse {
 
+	public String lektId;
 	public String value;
 	public String decimalId;
 	public String plats;
@@ -15,6 +16,14 @@ public class getCourse {
 	public List<String> columns;
 
 	
+	public String getLektId() {
+		return lektId;
+	}
+
+	public void setLektId(String lektId) {
+		this.lektId = lektId;
+	}
+
 	public String getPlats() {
 		return plats;
 	}

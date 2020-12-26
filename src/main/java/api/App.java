@@ -207,7 +207,7 @@ public class App {
 				lekt.add(course);
 
 
-			} // slut på första loopen
+			} // slut pï¿½ fï¿½rsta loopen
 //			for (getCourse lekt2 : lekt) {
 //				System.out.println(lekt2); // Will invoke overrided `toString()` method
 //			}
@@ -217,7 +217,7 @@ public class App {
 //			Boolean print = false;
 //			// do
 //			while (done == false) {
-//				System.out.println("Välj vilket lektions ID du vill ändra.");
+//				System.out.println("Vï¿½lj vilket lektions ID du vill ï¿½ndra.");
 //				print = false;
 //				String lid = input.next();
 //				for (int i = 0; i < lekt.size(); i++) {
@@ -225,14 +225,14 @@ public class App {
 //					if (id.equals(lid)) {
 //						print = true;
 //						lekt.get(i).getColumns();
-//						System.out.println("Vilken position vill du ändra? 0-12");
+//						System.out.println("Vilken position vill du ï¿½ndra? 0-12");
 //						pos = input.nextInt();
 //						if (pos <= 12 || pos >= 0) {
 //							System.out.println("Skriv in ny info");
 //							String newInfo = input.next();
 //							lekt.get(i).setColumnsPos(pos, newInfo);
 //						}
-//						System.out.println("ändra fler? j/n");
+//						System.out.println("ï¿½ndra fler? j/n");
 //						if (input.next().equals("n")) {
 //							done = true;
 //						}
@@ -244,10 +244,34 @@ public class App {
 //			}
 			// while(done == false);
 
-			// System.out.println("Välj vilket lektions ID du vill ändra.");
+			// System.out.println("Vï¿½lj vilket lektions ID du vill ï¿½ndra.");
 
 		} catch (Exception e) {
 			System.out.println(e);
+		}
+		return lekt;
+	}
+
+	public ArrayList<getCourse> searchLektInfo(String courseId, String startDate, String endDate, String lektId) {
+		ArrayList<getCourse> lekt = new ArrayList();
+//		System.out.println("Choose a decimal number(tvÃ¥ sissta 2020) ex:133649.28");
+//		String courseDecimal = input.nextLine();
+//		System.out.println("Choose startdate, all in a row, no spaces, / or -/n ex:20200901");
+//		String searchStartDate = input.nextLine();
+//		System.out.println("Choose enddate, all in a row, no spaces, / or -/n ex:20210117");
+//		String searchEndDate = input.nextLine();
+		String sourceURI = "https://cloud.timeedit.net/ltu/web/schedule1/ri.json?h=t&sid=3&p=start-end&objects=course&ox=0&types=0&fe=0&id=class&fr=t&step=0";
+		sourceURI = sourceURI.replace("course", courseId);
+		sourceURI = sourceURI.replace("start", startDate);
+		sourceURI = sourceURI.replace("end", endDate);
+		sourceURI = sourceURI.replace("class", lektId);
+
+		if (courseId.isEmpty()) {
+			System.out.println("Non valid search");
+		} else {
+			getCourseInfo(sourceURI, lekt);
+			System.out.println(lekt);
+//			System.out.println(lekt.get(19));
 		}
 		return lekt;
 	}

@@ -10,24 +10,24 @@ import java.util.Scanner;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-public class test1 {
+public class test2 {
 
 	Scanner input = new Scanner(System.in);
 
 	public static void main(String[] args) {
 
-		test1 test1 = new test1();
+		test2 test1 = new test2();
 
 		try {
 			// Här ska översatta kurs koden från test komma
 
-			test1.searchCourseInfo();
+			test1.searchLektInfo();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void searchCourseInfo() {
+	public void searchLektInfo() {
 		/*
 		 * Ska kunna modda datum i länken, skulle vara opti med -att se vilka datum
 		 * varje kod gäller för -kanske skicka med om det är distans/campus
@@ -36,28 +36,22 @@ public class test1 {
 		 */
 		// Scanner input = new Scanner(System.in);
 		ArrayList<getCourse> lekt = new ArrayList();
-		System.out.println("Choose a decimal number(två sissta 2020) ex:133649.28");
-		String courseDecimal = input.nextLine();
-		System.out.println("Choose startdate, all in a row, no spaces, / or -/n ex:20200901");
-		String searchStartDate = input.nextLine();
-		System.out.println("Choose enddate, all in a row, no spaces, / or -/n ex:20210117");
-		String searchEndDate = input.nextLine();
-		String sourceURI = "https://cloud.timeedit.net/ltu/web/schedule1/ri.json?h=t&sid=3&p=start.x,end.x&objects=course&ox=0&types=0&fe=0";
-		sourceURI = sourceURI.replace("course", courseDecimal);
-		sourceURI = sourceURI.replace("start", searchStartDate);
-		sourceURI = sourceURI.replace("end", searchEndDate);
+		System.out.println("Choose a decimal number ex:677517");
+		String lektDecimalId = input.nextLine();
+		String sourceURI = "https://cloud.timeedit.net/ltu/web/schedule1/ri.json?h=t&sid=3&p=20201201-20201231&objects=133649.28&ox=0&types=0&fe=0&id=class&fr=t&step=0";
+		sourceURI = sourceURI.replace("class", lektDecimalId);
 
-		if (courseDecimal.isEmpty()) {
+		if (lektDecimalId.isEmpty()) {
 			System.out.println("Non valid search");
-			searchCourseInfo();
+			searchLektInfo();
 		} else {
-			getCourseInfo(sourceURI, lekt);
+			getLektInfo(sourceURI, lekt);
 			System.out.println(lekt);
 			System.out.println(lekt.get(19));
 		}
 	}
 
-	public ArrayList<getCourse> getCourseInfo(String sourceURI, ArrayList<getCourse> lekt) {
+	public ArrayList<getCourse> getLektInfo(String sourceURI, ArrayList<getCourse> clas) {
 
 		try {
 			URL url = new URL(sourceURI);
@@ -128,13 +122,13 @@ public class test1 {
 
 				// getCourse course2 = new getCourse();
 				// course2 = course;
-				lekt.add(course);
+				clas.add(course);
 				// System.out.println(course.getColumns());
 //					course.setId(courseInfo.get(2));
 //					System.out.println(course.getId());
 
 			} // slut p� f�rsta loopen
-			for (getCourse lekt2 : lekt) {
+			for (getCourse lekt2 : clas) {
 				System.out.println(lekt2); // Will invoke overrided `toString()` method
 			}
 			int pos = 0;
@@ -147,17 +141,17 @@ public class test1 {
 				System.out.println("V�lj vilket lektions ID du vill �ndra.");
 				print = false;
 				String lid = input.next();
-				for (int i = 0; i < lekt.size(); i++) {
-					String id = lekt.get(i).getId();
+				for (int i = 0; i < clas.size(); i++) {
+					String id = clas.get(i).getId();
 					if (id.equals(lid)) {
 						print = true;
-						lekt.get(i).getColumns();
+						clas.get(i).getColumns();
 						System.out.println("Vilken position vill du �ndra? 0-12");
 						pos = input.nextInt();
 						if (pos <= 12 || pos >= 0) {
 							System.out.println("Skriv in ny info");
 							String newInfo = input.next();
-							lekt.get(i).setColumnsPos(pos, newInfo);
+							clas.get(i).setColumnsPos(pos, newInfo);
 						}
 						System.out.println("�ndra fler? j/n");
 						if (input.next().equals("n")) {
@@ -165,7 +159,7 @@ public class test1 {
 						}
 					}
 					if (print == true) {
-						System.out.println(lekt.get(i).getColumns());
+						System.out.println(clas.get(i).getColumns());
 					}
 				}
 			}
@@ -176,7 +170,7 @@ public class test1 {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return lekt;
+		return clas;
 	}
 
 }
