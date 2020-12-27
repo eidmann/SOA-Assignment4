@@ -1,18 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
-	crossorigin="anonymous">
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script
@@ -31,59 +20,66 @@
 		<div class="row">
 			<!-- val för vilken kurs och modul -->
 			<div class="col">
-				<label>Kurs</label> <input placeholder="Ange Kurskod" id="searchTxt"
+				<input placeholder="Ange Kurskod" id="searchTxt"
 					class="form-control"></input>
 			</div>
 			<div class="col">
-				<label>År</label>
-				<select id="startYear" class="form-control">
-					<option selected>-</option>
-					<option value="2020">2020</option>
-					<option value="2019">2019</option>
-				</select>
+			    <form>
+			        <div class="input-group">
+			            <div class="input-group-prepend">
+			                <span class="input-group-text">Från:</span>
+			            </div>
+			            <select id="startYear" class="form-select">
+							<option value="" selected disabled hidden>År</option>
+							<option value="2020">2020</option>
+							<option value="2019">2019</option>
+						</select>
+						<select id="startMonth" class="form-select">
+							<option value="" selected disabled hidden>Månad</option>
+							<option value="01">Januari</option>
+							<option value="02">Februari</option>
+							<option value="03">Mars</option>
+							<option value="04">April</option>
+							<option value="05">Maj</option>
+							<option value="06">Juni</option>
+							<option value="07">Juli</option>
+							<option value="08">Augusti</option>
+							<option value="09">September</option>
+							<option value="10">Oktober</option>
+							<option value="11">November</option>
+							<option value="12">December</option>
+						</select>
+			        </div>
+			    </form>
 			</div>
 			<div class="col">
-				<label>Månad</label> 
-				<select id="startMonth" class="form-control">
-					<option selected>-</option>
-					<option value="01">Januari</option>
-					<option value="02">Februari</option>
-					<option value="03">Mars</option>
-					<option value="04">April</option>
-					<option value="05">Maj</option>
-					<option value="06">Juni</option>
-					<option value="07">Juli</option>
-					<option value="08">Augusti</option>
-					<option value="09">September</option>
-					<option value="10">Oktober</option>
-					<option value="11">November</option>
-					<option value="12">December</option>
-				</select>
-			</div>
-			<div class="col">
-				<label>År</label> <select id="endYear" class="form-control">
-					<option selected>-</option>
-					<option value="2020">2020</option>
-					<option value="2019">2019</option>
-				</select>
-			</div>
-			<div class="col">
-				<label>Månad</label> 
-				<select id="endMonth" class="form-control">
-					<option selected>-</option>
-					<option value="01">Januari</option>
-					<option value="02">Februari</option>
-					<option value="03">Mars</option>
-					<option value="04">April</option>
-					<option value="05">Maj</option>
-					<option value="06">Juni</option>
-					<option value="07">Juli</option>
-					<option value="08">Augusti</option>
-					<option value="09">September</option>
-					<option value="10">Oktober</option>
-					<option value="11">November</option>
-					<option value="12">December</option>
-				</select>
+			    <form>
+			        <div class="input-group">
+			            <div class="input-group-prepend">
+			                <span class="input-group-text">Till:</span>
+			            </div>
+			            <select id="endYear" class="form-select">
+							<option value="" selected disabled hidden>År</option>
+							<option value="2020">2020</option>
+							<option value="2019">2019</option>
+						</select>
+						<select id="endMonth" class="form-select">
+							<option value="" selected disabled hidden>Månad</option>
+							<option value="01">Januari</option>
+							<option value="02">Februari</option>
+							<option value="03">Mars</option>
+							<option value="04">April</option>
+							<option value="05">Maj</option>
+							<option value="06">Juni</option>
+							<option value="07">Juli</option>
+							<option value="08">Augusti</option>
+							<option value="09">September</option>
+							<option value="10">Oktober</option>
+							<option value="11">November</option>
+							<option value="12">December</option>
+						</select>
+			        </div>
+			    </form>
 			</div>
 		</div>
 	</div>
@@ -93,7 +89,7 @@
 	<div id="app-3">
 		<div class="container">
 			<br>
-			<button class="btn btn-primary" onclick="data()"
+			<button class="btn btn-secondary" onclick="data()"
 				v-on:click="loadData()">Ladda kurstillfällen</button>
 			<!--<p>
 			<button v-on:click="showBetyg()">Visa Ladok betyg</button>
@@ -101,15 +97,15 @@
 		<p>
 			<button v-on:click="setBetygLadok()">Satt Betyg</button>
 		</p>-->
-			<button class="btn btn-primary" onclick="data2()"
+			<button class="btn btn-secondary" onclick="data2()"
 				v-on:click="loadKursEvents()">Ladda Lektioner</button>
 			<!--<p>
 			<button v-on:click="loadModule()">Ladda module</button>
 		</p>-->
-			<button class="btn btn-primary" onclick="data3()"
+			<button class="btn btn-secondary" onclick="data3()"
 				v-on:click="mittskit()">Ändra lektion</button>
 			<div id="t1" style="display: none; margin-top: 30px;">
-				<table class="table table-striped table-primary border border-secondary">
+				<table class="table table-striped table-bordered table-light border border-dark">
 					<caption>Välj ett kurstillfälle
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
 							<path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z" /></svg>
@@ -143,7 +139,7 @@
 				</table>
 			</div>
 			<div id="t2" style="display: none;">
-				<table class="table table-striped table-primary border border-secondary">
+				<table class="table table-striped table-bordered table-light border border-dark">
 					<caption>Välj en lektion att ändra <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
 							<path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z" /></svg>
 					</caption>
@@ -190,43 +186,47 @@
 				</table>
 			</div>
 			<div v-for="column in columns" id="t3" style="margin-bottom:30px">
-					<!-- <span>{{column.columns[1]}}</span><br> -->
-					<label>0</label>
+			<div class="row">
+				<div class="col">
+					<label>Column 0</label>
 					<textarea class="form-control">{{column.columns[0]}}</textarea>
-					<label>1</label>
+					<label>Column 1</label>
 					<textarea class="form-control">{{column.columns[1]}}</textarea>
-					<label>2</label>
+					<label>Column 2</label>
 					<textarea class="form-control">{{column.columns[2]}}</textarea>
-					<label>3</label>
+					<label>Column 3</label>
 					<textarea class="form-control">{{column.columns[3]}}</textarea>
-					<label>4</label>
+					<label>Column 4</label>
 					<textarea class="form-control">{{column.columns[4]}}</textarea>
-					<label>5</label>
+					<label>Column 5</label>
 					<textarea class="form-control">{{column.columns[5]}}</textarea>
-					<label>6</label>
+					</div>
+					<div class="col">
+					<label>Column 6</label>
 					<textarea class="form-control">{{column.columns[6]}}</textarea>
-					<label>7</label>
+					<label>Column 7</label>
 					<textarea class="form-control">{{column.columns[7]}}</textarea>
-					<label>8</label>
+					<label>Column 8</label>
 					<textarea class="form-control">{{column.columns[8]}}</textarea>
-					<label>9</label>
+					<label>Column 9</label>
 					<textarea class="form-control">{{column.columns[9]}}</textarea>
-					<label>10</label>
+					<label>Column 10</label>
 					<textarea class="form-control">{{column.columns[10]}}</textarea>
-					<label>11</label>
-					<textarea class="form-control">{{column.columns[11]}}</textarea>
-					<label>12</label>
-					<textarea class="form-control">{{column.columns[12]}}</textarea>
-					<br>
-					<button class="btn btn-primary">Ladda ändringar</button>
+					<label>Column 11</label>
+					<textarea class="form-control">{{column.columns[11]}}</textarea>					
+					</div>
 				</div>
+				<label>Column 12</label>
+					<textarea class="form-control">{{column.columns[12]}}</textarea>
+				<br>
+				<button class="btn btn-secondary">Skicka till Canvas</button>
 			</div>
+		</div>
 	</div>
 	<script>
 	function data() {
 		 document.getElementById("t1").style.display = "flex";
 		 document.getElementById("t2").style.display = "none";
-		 
 		}
 	function data2(){
 		document.getElementById("t2").style.display = "flex";
@@ -262,7 +262,7 @@
    			axios.get('http://localhost:8080/EA-SOA-Projekt/api/response/kurskod/' + selKurs)
 			 .then(response => {
 				 this.courses = response.data;
-				 console.log(response);
+				 console.log(response.data);
 			 })
 			 .catch(error =>{
 				 console.log(error);
