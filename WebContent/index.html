@@ -97,14 +97,14 @@
 		<p>
 			<button v-on:click="setBetygLadok()">Satt Betyg</button>
 		</p>-->
-			<button class="btn btn-secondary" onclick="data2()"
-				v-on:click="loadKursEvents()">Ladda Lektioner</button>
+			<!-- <button class="btn btn-secondary" onclick="data2()"
+				v-on:click="loadKursEvents()">Ladda Lektioner</button> -->
 			<!--<p>
 			<button v-on:click="loadModule()">Ladda module</button>
 		</p>-->
-			<button class="btn btn-secondary" onclick="data3()"
-				v-on:click="mittskit()">Ändra lektion</button>
-			<div id="t1" style="display: none; margin-top: 30px;">
+			<!-- <button class="btn btn-secondary" onclick="data3()"
+				v-on:click="mittskit()">Ändra lektion</button> -->
+			<div id="t1" style="display:none; margin-top: 30px;">
 				<table class="table table-striped table-bordered table-light border border-dark">
 					<caption>Välj ett kurstillfälle
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
@@ -125,7 +125,7 @@
 					</thead>
 					<tbody id="Table1">
 						<tr v-for="course in courses">
-							<td><input type="checkbox"></td>
+							<td><input v-on:change="loadKursEvents()" onchange="data2()" type="checkbox" v-model="events"></td>
 							<td>{{course.decimalId}}</td>
 							<td>{{course.value}}</td>
 							<td>{{course.plats}}</td>
@@ -166,7 +166,7 @@
 					</thead>
 					<tbody id="Table2">
 						<tr v-for="event in events">
-							<td><input type="checkbox"></td>
+							<td><input v-on:change="mittskit" type="checkbox"></td>
 							<td>{{event.id}}</td>
 							<td>{{event.startdate}}</td>
 							<td>{{event.starttime}}-{{event.endtime}}</td>
@@ -188,6 +188,7 @@
 				</table>
 			</div>
 			<div v-for="column in columns" id="t3" style="margin-bottom:30px">
+			<h5>Lektion: {{column.id}}, {{column.startdate}}, {{column.starttime}}-{{column.endtime}}</h5>
 			<div class="row">
 				<div class="col">
 					<label>Column 0</label>
@@ -334,7 +335,18 @@
 				 console.log(error);
 			 })
 		 }
-   	 }
+   	 },
+   	 loadLektInfo: function(){
+   		 var id = "44850"; 
+   		 var info = "HEJ"; 
+   		 axios.put('https://ltu.instructure.com/api/v1/' + info.value + '/' + id.value + '') 
+   		 .then(response => { 
+   			 this.columns = response.data; 
+   			 console.log(response); 
+   		 }) 
+   		 .catch(error =>{ console.log(error); 
+   		 }) 
+   		 },
     });
     </script>
 </body>
