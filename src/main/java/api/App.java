@@ -1,6 +1,6 @@
 package main.java.api;
 
-import java.io.BufferedReader;
+import java.io.BufferedReader; 
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -273,6 +273,12 @@ public class App {
 			System.out.println(lekt);
 //			System.out.println(lekt.get(19));
 		}
+		return lekt;
+	}
+	public ArrayList<getCourse> sendCanvas(String[][] canvasInfo){
+		ArrayList<getCourse> lekt = new ArrayList();
+		
+		sendCanvas(canvasInfo);
 		return lekt;
 	}
 

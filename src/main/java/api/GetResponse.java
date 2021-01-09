@@ -1,13 +1,16 @@
 package main.java.api;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
 
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 
 @Path("response")
 public class GetResponse {
@@ -44,7 +47,23 @@ public class GetResponse {
 		ArrayList<getCourse> App = new App().searchLektInfo(courseId,startDate,endDate, lektId);
 		App.toString();
 		return Response.ok(App).build();
+	}	
+	@POST
+	@Path("/postEvent/{title}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response postEvent(@FormParam("title")String titel) throws Exception {
+		System.out.println("test");
+		test3 test = new test3();
+		
+		ArrayList<String> test3 = new ArrayList();
+		test3.set(9, titel);
+		
+		
+				
+		test.sendCanvas(titel);
+		
+		return Response.ok().build();
+		
 	}
-	
 	
 }

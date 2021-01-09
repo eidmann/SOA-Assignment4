@@ -91,6 +91,7 @@
 			<br>
 			<button class="btn btn-secondary" onclick="data()"
 				v-on:click="loadData()">Ladda kurstillfällen</button>
+				<button class="btn btn-secondary" v-on:click="loadLektInfo">Skicka till Canvas</button>
 			<!--<p>
 			<button v-on:click="showBetyg()">Visa Ladok betyg</button>
 		</p>
@@ -125,7 +126,7 @@
 					</thead>
 					<tbody id="Table1">
 						<tr v-for="course in courses">
-							<td><input v-on:change="loadKursEvents()" onchange="data2()" type="checkbox" v-model="events"></td>
+							<td><input v-on:change="loadKursEvents()" onchange="data2()" type="checkbox" v-model="events" id="cb1"></td>
 							<td>{{course.decimalId}}</td>
 							<td>{{course.value}}</td>
 							<td>{{course.plats}}</td>
@@ -222,11 +223,45 @@
 				<label>Column 12</label>
 					<textarea class="form-control">{{column.columns[12]}}</textarea>
 				<br>
-				<button class="btn btn-secondary">Skicka till Canvas</button>
+				<button class="btn btn-secondary" v-on:click="loadLektInfo()">Skicka till Canvas</button>
 			</div>
 		</div>
 	</div>
-	<script>
+	<script type="text/javascript">
+	
+	/*function sendCanvas(){
+		
+		 const json = JSON.stringify(param)
+		
+		var xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		      document.getElementById("demo").innerHTML = this.responseText;
+		      console.log(this.responseText);
+		    }
+		  };
+		  xhttp.open("POST", "https://ltu.instructure.com/api/v1/calendar_events.json");
+		  xhttp.setRequestHeader("Authorization", "Bearer 3755~KhY3fNQ6QapGhkdh0pkg0sGlMneR8ORxXHupWVTkvhLiC0uVgbXymklz6Dwkbv6N","Content-type", "application/json");
+		  xhttp.send(json);
+	} */
+		/*  $(document).ready(function(){
+			  $("#my-form").click(function(){
+				  const param = [{
+						context_code: "user_64603",
+						title: "Hej",
+						start_at: "2018-11-20T08:00:00Z",
+						end_at: "2018-11-20T08:00:00Z"
+				}];
+				  $.ajax({
+					  url: "https://ltu.instructure.com/api/v1/calendar_events.json",
+					  type: 'POST',
+					  authorization: 'Bearer 3755~KhY3fNQ6QapGhkdh0pkg0sGlMneR8ORxXHupWVTkvhLiC0uVgbXymklz6Dwkbv6N',
+					  data: JSON.stringify({ Param:param }),
+					  contentType: "application/json; charset=utf-8",
+					  dataType: "json",
+					  });
+				  });
+			  }); */
 	function data() {
 		 document.getElementById("t1").style.display = "flex";
 		 document.getElementById("t2").style.display = "none";
@@ -249,6 +284,8 @@
 	var selEndMonth = document.getElementById("endMonth");
 	var message1;
 // initierar VUE
+	/* import Vuw from 'vue';
+	window.axios = require('axios'); */
 	var app2 = new Vue({
    	 el: '#app-3',
    	 data:{
@@ -298,10 +335,10 @@
 	                message1 = row.cells[1].innerHTML;
 	            }
 	        }
-	        alert(message1);
+	        /* alert(message1); */
 			 axios.get('http://localhost:8080/EA-SOA-Projekt/api/response/kursid/'+ message1 +'/'
 					 + selStartYear.value + selStartMonth.value+'01/' + selEndYear.value + selEndMonth.value+'31' )
-			 .then(response => {
+			 .then(response => { 
 				 this.events = response.data;
 				 console.log(response);
 			 })
@@ -323,31 +360,63 @@
 		                var row = checkBoxes[i].parentNode.parentNode;
 		                message = row.cells[1].innerHTML;
 		            }
-		        }
-			 alert(message);
+			 }
+			/*  alert(message); */
 			 axios.get('http://localhost:8080/EA-SOA-Projekt/api/response/lektid/'+ message1 +'/'
 					 + selStartYear.value + selStartMonth.value+'01/' + selEndYear.value + selEndMonth.value+'31/' +message +'' )
 			 .then(response => {
 				 this.columns = response.data;
+				 console.log(this.columns);
 				 console.log(response);
 			 })
 			 .catch(error =>{
 				 console.log(error);
 			 })
-		 }
    	 },
    	 loadLektInfo: function(){
-   		 var id = "44850"; 
-   		 var info = "HEJ"; 
-   		 axios.put('https://ltu.instructure.com/api/v1/' + info.value + '/' + id.value + '') 
+   		 
+   		 console.log(this.columns[0]);
+   		console.log(this.columns[0].columns);
+   		 
+   		 axios.post('http://localhost:8080/EA-SOA-Projekt/api/response/postEvent/' + this.columns[0].columns[9])
+   		 .then(response => {
+   			 	this.columns=response.data;
+				 console.log(response);
+			 })
+			 .catch(error =>{
+				 console.log(error);
+			 })
+   		 
+   	 	}
+   	 }
+    });
+   		 /* const proxyurl = "https://cors-anywhere.herokuapp.com/";
+   		 const token = '3755~KhY3fNQ6QapGhkdh0pkg0sGlMneR8ORxXHupWVTkvhLiC0uVgbXymklz6Dwkbv6N';
+   		 const url = 'https://ltu.instructure.com/api/v1/calendar_events.json';
+   		 const param = {
+   				context_code : 'user_64603',
+   				title : 'Hej',
+   				start_at : '2018-11-16T06:00:00Z',
+   				end_at : '2018-11-16T7:00:00Z'
+   		};
+   					 'calendar_event[context_code]', 'user_64603' 
+   		 const conf = { 
+   				'Content-Type': 'application/json',
+   				'Authorization': 'Bearer 3755~KhY3fNQ6QapGhkdh0pkg0sGlMneR8ORxXHupWVTkvhLiC0uVgbXymklz6Dwkbv6N'
+   		 };
+   		 
+   		 axios.post(url, param, {
+   			 headers: {
+   				'Authorization': `Bearer 3755~KhY3fNQ6QapGhkdh0pkg0sGlMneR8ORxXHupWVTkvhLiC0uVgbXymklz6Dwkbv6N`
+   			 }
+   		 })
    		 .then(response => { 
-   			 this.columns = response.data; 
+   			 //this.columns = response.data;
    			 console.log(response); 
    		 }) 
    		 .catch(error =>{ console.log(error); 
    		 }) 
-   		 },
-    });
+   		} */
     </script>
 </body>
 </html>
