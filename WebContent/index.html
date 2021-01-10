@@ -375,17 +375,19 @@
    	 },
    	 loadLektInfo: function(){
    		 
-   		 console.log(this.columns[0]);
-   		console.log(this.columns[0].columns);
-   		 
-   		 axios.post('http://localhost:8080/EA-SOA-Projekt/api/response/postEvent/' + this.columns[0].columns[9])
+   		/*  console.log(this.columns[0]);
+   		console.log(this.columns[0].columns); */
+   		//alert(this.columns[0].startdate);
+   		 console.log(this.columns[0].starttime)
+   		 axios.post('http://localhost:8080/EA-SOA-Projekt/api/response/postEvent/' + 
+   				 this.columns[0].startdate + '/' + this.columns[0].starttime + '/' + this.columns[0].endtime + '/'
+   				 + this.columns[0].columns[1] + '/' + this.columns[0].columns[9])
    		 .then(response => {
-   			 	this.columns=response.data;
-				 console.log(response);
+   			 
 			 })
 			 .catch(error =>{
 				 console.log(error);
-			 })
+			 }) 
    		 
    	 	}
    	 }

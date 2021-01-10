@@ -14,7 +14,6 @@ public class getCourse {
 	public String enddate;
 	public String endtime;
 	public List<String> columns;
-	public String[][] canvasInfo;
 
 	
 	public String getLektId() {
@@ -99,14 +98,6 @@ public class getCourse {
 
 	public void setColumnsPos(int pos, String info) {
 		this.columns.set(pos, info);
-	}
-
-	public String[][] getCanvasInfo() {
-		return canvasInfo;
-	}
-
-	public void setCanvasInfo(String[][] canvasInfo) {
-		this.canvasInfo = canvasInfo;
 	}
 
 	@Override

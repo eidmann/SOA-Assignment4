@@ -21,7 +21,7 @@ public static void main (String []args) throws Exception {
      System.out.println("Testing 2 - Send Http POST request");
      //obj.sendCanvas();
 }
-	 public void sendCanvas(ArrayList<String> test3) throws Exception {
+	 public void sendCanvas(String date,String startTime,String endTime, String info ,String titel) throws Exception {
 
 	        // form parameters
 		 /*CMD 
@@ -37,10 +37,10 @@ public static void main (String []args) throws Exception {
 	        Scanner input = new Scanner(System.in);
 	        
 	        data.put("calendar_event[context_code]","user_64603");
-	        data.put("calendar_event[title]", test3.get(9));
-	        data.put("calendar_event[start_at]","2020-12-15T17:00:00Z");
-	        data.put("calendar_event[end_at]","2020-12-15T18:00:00Z");
-
+	        data.put("calendar_event[title]", titel);
+	        data.put("calendar_event[start_at]", date + "T" + startTime + ":00+1:00");
+	        data.put("calendar_event[end_at]", date + "T" + endTime + ":00+1:00");
+	        data.put("calendar_event[description]", info);
 	        HttpRequest request = HttpRequest.newBuilder()
 	                .POST(buildFormDataFromMap(data))
 	                .uri(URI.create("https://ltu.instructure.com/api/v1/calendar_events.json"))

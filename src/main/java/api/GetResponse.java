@@ -1,5 +1,6 @@
 package main.java.api;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 import javax.ws.rs.FormParam;
@@ -49,20 +50,15 @@ public class GetResponse {
 		return Response.ok(App).build();
 	}	
 	@POST
-	@Path("/postEvent/{title}")
+	@Path("/postEvent/{date}/{starttime}/{endtime}/{info}/{title}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response postEvent(@FormParam("title")String titel) throws Exception {
-		System.out.println("test");
+	public Response postEvent(@PathParam("date")String date,@PathParam("starttime")String startTime,@PathParam("endtime")String endTime,@PathParam("info")String info,@PathParam("title")String titel) throws Exception {
+		
 		test3 test = new test3();
 		
-		ArrayList<String> test3 = new ArrayList();
-		test3.set(9, titel);
+		test.sendCanvas(date,startTime,endTime,info,titel);
 		
-		
-				
-		test.sendCanvas(titel);
-		
-		return Response.ok().build();
+		return Response.created(URI.create("response/postEvent/" + titel + "/" + date + "/" + startTime + "/" + endTime + "/" + info)).build();
 		
 	}
 	
